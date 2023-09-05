@@ -4,8 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library App</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body></body>
+  <body class="light">
+    <div class="navbar light">
+      <div class="title">
+        <img src="./pics/logo.png" alt="logo" />
+        <h3>The Book Collection</h3>
+      </div>
+      <div class="total-books">Collection Total</div>
+      <div class="total-read">Total Read</div>
+      <div class="theme">
+        <label for="theme-select">Theme:</label>
+        <i class="fa fa-sun-o"></i>
+        <select id="theme-select">
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+      </div>
+    </div>
+    <div class="main"></div>
+  </body>
   <script src="script.js"></script>
 </html>
