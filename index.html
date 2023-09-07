@@ -19,15 +19,85 @@
       <div class="total-books">Collection Total</div>
       <div class="total-read">Total Read</div>
       <div class="theme">
-        <label for="theme-select">Theme:</label>
-        <i class="fa fa-sun-o"></i>
+        <label for="theme-select"><i class="fa fa-sun-o"></i></label>
         <select id="theme-select">
-          <option value="light">Light</option>
-          <option value="dark">Dark</option>
+          <option value="light">Light Theme</option>
+          <option value="dark">Dark Theme</option>
         </select>
       </div>
     </div>
-    <div class="main"></div>
+    <div class="main">
+      <div class="sidebar">
+        <div class="filter">
+          <h3>Filter by Genre</h3>
+          <div class="checkboxes">
+            <label class="checkbox-label">
+              <input type="checkbox" name="genre" value="fiction" checked />
+              Fiction
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="genre" value="nonfiction" checked />
+              Non-Fiction
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="genre" value="mystery" checked />
+              Mystery
+            </label>
+            <label class="checkbox-label">
+              <input
+                type="checkbox"
+                name="genre"
+                value="all"
+                id="select-all-genres"
+                checked
+              />
+              All
+            </label>
+            <!-- Add more genres as needed -->
+          </div>
+        </div>
+        <div class="sort">
+          <h3>Sort by Date Added</h3>
+          <div class="radio">
+            <input
+              type="radio"
+              id="ascend"
+              name="sort"
+              value="ascend"
+              checked
+            />
+            <label for="ascend">Ascending</label>
+          </div>
+          <div class="radio">
+            <input type="radio" id="descend" name="sort" value="descend" />
+            <label for="descend">Descending</label>
+          </div>
+        </div>
+        <div id="button-container" class="button-container">
+          <button class="add-book-button">
+            <span class="button-icon"><i class="fa fa-plus"></i></span>
+            <span class="button-text"
+              ><i class="fa fa-circle"></i> Add Book <i class="fa fa-circle"></i
+            ></span>
+          </button>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Book Title</th>
+            <th>Author</th>
+            <!-- <th>Description</th> -->
+            <th>Date Added</th>
+            <th>Pages Read</th>
+            <th>Total Pages</th>
+            <th>Progress</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
   </body>
   <script src="script.js"></script>
 </html>

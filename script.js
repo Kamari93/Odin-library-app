@@ -31,6 +31,8 @@ function addBookToLibrary() {
 // genres include fiction, non-fiction, etc. add as drop-down options in form
 
 const themeSelect = document.getElementById('theme-select');
+const genreCheckboxes = document.querySelectorAll('input[name="genre"]');
+const selectAllGenresCheckbox = document.getElementById('select-all-genres');
 
 themeSelect.addEventListener('change', function() {
     const selectedTheme = themeSelect.value;
@@ -55,3 +57,18 @@ themeSelect.addEventListener('change', function() {
         document.querySelector('i').appendChild(sunIcon);
 }
 });
+
+// Add event listener for "Select All" checkbox
+selectAllGenresCheckbox.addEventListener('change', toggleSelectAllGenres);
+
+// Function to toggle the selection of all genre checkboxes
+        function toggleSelectAllGenres() {
+            const isChecked = selectAllGenresCheckbox.checked;
+
+            genreCheckboxes.forEach(checkbox => {
+                checkbox.checked = isChecked;
+            });
+
+            // Apply filters when "Select All" checkbox is clicked
+            // applyFilters();
+        }
