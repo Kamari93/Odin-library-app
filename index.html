@@ -17,9 +17,11 @@
         <h3>The Book Collection</h3>
       </div>
       <div class="total-books">Collection Total</div>
-      <div class="total-read">Total Read</div>
+      <div class="total-read">Total Completed</div>
       <div class="theme">
-        <label for="theme-select"><i class="fa fa-sun-o"></i></label>
+        <label class="theme" for="theme-select"
+          ><i class="fa fa-sun-o"></i
+        ></label>
         <select id="theme-select">
           <option value="light">Light Theme</option>
           <option value="dark">Dark Theme</option>
@@ -29,19 +31,19 @@
     <div class="main">
       <div class="sidebar">
         <div class="filter">
-          <h3>Filter by Genre</h3>
+          <h3>Filter by Book Type</h3>
           <div class="checkboxes">
             <label class="checkbox-label">
-              <input type="checkbox" name="genre" value="fiction" checked />
-              Fiction
+              <input type="checkbox" name="genre" value="book" checked />
+              Traditional Book
             </label>
             <label class="checkbox-label">
-              <input type="checkbox" name="genre" value="nonfiction" checked />
-              Non-Fiction
+              <input type="checkbox" name="genre" value="audio" checked />
+              Audio Book
             </label>
             <label class="checkbox-label">
-              <input type="checkbox" name="genre" value="mystery" checked />
-              Mystery
+              <input type="checkbox" name="genre" value="summary" checked />
+              Summary
             </label>
             <label class="checkbox-label">
               <input
@@ -74,7 +76,7 @@
           </div>
         </div>
         <div id="button-container" class="button-container">
-          <button class="add-book-button">
+          <button class="add-book-button" onclick="showForm()">
             <span class="button-icon"><i class="fa fa-plus"></i></span>
             <span class="button-text"
               ><i class="fa fa-circle"></i> Add Book <i class="fa fa-circle"></i
@@ -86,7 +88,7 @@
         <div class="form-container" id="form-container">
           <div class="form">
             <span class="close-btn" onclick="closeForm()">&#10006;</span>
-            <h2>Add a Book</h2>
+            <h1>Add a Book</h1>
             <form id="book-form">
               <div class="form-group">
                 <label for="title">Title:</label>
@@ -97,16 +99,16 @@
                 <input type="text" id="author" required />
               </div>
               <div class="form-group">
-                <label for="date-added">Date Added:</label>
-                <input type="date" id="date-added" required />
-              </div>
-              <div class="form-group">
                 <label for="pages-read">Pages Read:</label>
-                <input type="number" id="pages-read" required />
+                <input type="number" id="pages-read" min="1" required />
               </div>
               <div class="form-group">
                 <label for="total-pages">Total Pages:</label>
-                <input type="number" id="total-pages" required />
+                <input type="number" id="total-pages" min="1" required />
+              </div>
+              <div class="form-group">
+                <label for="date-added">Date Added:</label>
+                <input type="date" id="date-added" required />
               </div>
               <div class="form-group sub-button">
                 <button type="button" onclick="addBook()">Submit</button>
@@ -119,17 +121,18 @@
       <table>
         <thead>
           <tr>
-            <th>Book Title</th>
+            <th>Title</th>
             <th>Author</th>
             <!-- <th>Description</th> -->
-            <th>Date Added</th>
             <th>Pages Read</th>
             <th>Total Pages</th>
             <th>Progress</th>
+            <th>Date Added</th>
             <th>Edit</th>
             <th>Delete</th>
           </tr>
         </thead>
+        <tbody id="book-list"></tbody>
       </table>
     </div>
   </body>

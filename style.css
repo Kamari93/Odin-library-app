@@ -127,7 +127,8 @@ select {
 }
 .add-book-button {
   background-color: rgb(16, 77, 72);
-  margin-left: 5px;
+  /* margin-left: 5px; */
+  margin-right: 10px;
   border: none;
   border-radius: 50%;
   width: 60px;
@@ -192,6 +193,10 @@ select {
   align-items: center;
 }
 
+#form-container {
+  display: none;
+}
+
 .form {
   background: white;
   padding: 20px;
@@ -201,7 +206,12 @@ select {
   position: relative;
 }
 
-.form h2 {
+.form h1 {
+  margin-top: 30px;
+  /* margin-left: 30%; */
+  font-size: 45px;
+  /* flex: 1; */
+  justify-content: flex-end;
   margin-bottom: 20px;
 }
 
@@ -213,18 +223,19 @@ select {
 
 .form-group label {
   flex: 1;
-  text-align: right;
-  margin-right: 10px;
+  /* text-align: right; */
+  /* margin-right: 10px; */
 }
 
 .form-group input {
   flex: 2;
   padding: 5px;
+  border-radius: 10px;
 }
 
 .form-group button {
-  /* flex: 1; */
-  width: 50%;
+  flex: 1;
+  /* width: 90%; */
   margin-top: 20px;
   background-color: var(--main-bg-color);
   color: white;
@@ -236,6 +247,7 @@ select {
 
 .sub-button {
   justify-content: center;
+  margin-left: 50px;
 }
 
 .form-group button:hover {

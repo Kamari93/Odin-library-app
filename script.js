@@ -1,20 +1,30 @@
 console.log("Keep Going 🍊 🌊...");
 
-const myLibrary = [];
+const themeSelect = document.getElementById('theme-select');
+const genreCheckboxes = document.querySelectorAll('input[name="genre"]');
+const selectAllGenresCheckbox = document.getElementById('select-all-genres');
+
+// List of Book Objects
+let bookList = [];
 
 // The book object and constructor
-class Books {
-    // constructor
-    constructor(title, author, genre, totalPages, pagesRead, year, completed) {
+class Book {
+    constructor(title, author, pagesRead, totalPages, dateAdded) {
         this.title = title;
         this.author = author;
-        this.genre = genre;
-        this.totalPages = totalPages;
         this.pagesRead = pagesRead;
-        this.year = year;
-        this.completed = completed;
+        this.totalPages = totalPages;
+        this.dateAdded = dateAdded;
+        this.progress = ((pagesRead / totalPages) * 100).toFixed(2);
     }
-};
+}
+
+
+themeSelect.addEventListener('change', toggleTheme);
+
+// Add event listener for "Select All" checkbox
+selectAllGenresCheckbox.addEventListener('change', toggleSelectAllGenres);
+
 
 /** add funct that takes user’s input and store the new book objs  into myLibrary arr*/
 function addBookToLibrary() {
@@ -23,24 +33,26 @@ function addBookToLibrary() {
     myLibrary.push(newBook);
 };
 
-// add progress circle for each book and progress bar for total books completed out of total
-// progress change colors depending on percentages complete red, yellow, green
-// add dark/light theme slider...no need for extra animation...model after MDN's themes
-// add a feature that edits and updates book info
-// add sort and filter functions on sidebar 
-// genres include fiction, non-fiction, etc. add as drop-down options in form
+function addBook() {
+    const title = document.getElementById("title").value;
+    const author = document.getElementById("author").value;
+    const pagesRead = parseInt(document.getElementById("pages-read").value);
+    const totalPages = parseInt(document.getElementById("total-pages").value);
+    const dateAdded = document.getElementById("date-added").value;
 
-const themeSelect = document.getElementById('theme-select');
-const genreCheckboxes = document.querySelectorAll('input[name="genre"]');
-const selectAllGenresCheckbox = document.getElementById('select-all-genres');
+    // Create a new Book object
+    const newBook = new Book(title, author, pagesRead, totalPages, dateAdded);
 
-themeSelect.addEventListener('change', function() {
+    bookList.push(newBook); // Add the book to the list
+    updateTable(); // Update the table
+
+    document.getElementById("book-form").reset();
+    closeForm();
+}
+
+function toggleTheme () {
     const selectedTheme = themeSelect.value;
     document.body.className = selectedTheme;
-
-    // Remove existing icons
-    // const existingIcons = document.querySelectorAll('i');
-    // existingIcons.forEach(icon => icon.remove());
 
     // Add icons based on the selected theme
     if (selectedTheme === 'dark') {
@@ -48,27 +60,31 @@ themeSelect.addEventListener('change', function() {
         const moonIcon = document.querySelector('i');
         moonIcon.className = 'fa fa-moon-o';
         // document.querySelector('.theme').appendChild(moonIcon);
-        document.querySelector('i').appendChild(moonIcon);
+        document.querySelector('.theme').prepend(moonIcon);
     } else {
         // const sunIcon = document.createElement('i');
         const sunIcon = document.querySelector('i');
         sunIcon.className = 'fa fa-sun-o';
         // document.querySelector('.theme').appendChild(sunIcon);
-        document.querySelector('i').appendChild(sunIcon);
-}
-});
-
-// Add event listener for "Select All" checkbox
-selectAllGenresCheckbox.addEventListener('change', toggleSelectAllGenres);
+        document.querySelector('.theme').prepend(sunIcon);
+    };
+};
 
 // Function to toggle the selection of all genre checkboxes
-        function toggleSelectAllGenres() {
-            const isChecked = selectAllGenresCheckbox.checked;
+function toggleSelectAllGenres() {
+    const isChecked = selectAllGenresCheckbox.checked;
 
-            genreCheckboxes.forEach(checkbox => {
-                checkbox.checked = isChecked;
-            });
+    genreCheckboxes.forEach(checkbox => {
+        checkbox.checked = isChecked;
+    });
+};
 
-            // Apply filters when "Select All" checkbox is clicked
-            // applyFilters();
-        }
+function showForm() {
+    const formContainer = document.getElementById("form-container");
+    formContainer.style.display = "flex";
+}
+
+function closeForm() {
+    const formContainer = document.getElementById("form-container");
+    formContainer.style.display = "none";
+}
