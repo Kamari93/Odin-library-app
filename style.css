@@ -290,3 +290,37 @@ tr:nth-child(even) {
 tr:hover {
   background-color: #d3d3d3;
 }
+
+/* Add this CSS for styling the progress cell */
+.progress-cell {
+  text-align: left;
+}
+
+.progress-cell .progress-circle {
+  display: inline-block;
+  text-align: center;
+  width: 40px; /* Adjust the size as needed */
+  height: 40px; /* Adjust the size as needed */
+  line-height: 40px; /* Vertically center the text within the circle */
+  /* background-color: green; Change to your desired circular border color */
+  border-radius: 50%; /* Create a circular shape */
+  color: white; /* Text color */
+  font-weight: bold;
+}
+
+/* Define CSS classes for background colors */
+.red-background {
+  background-color: red;
+}
+
+.yellow-background {
+  background-color: yellow;
+}
+
+.orange-background {
+  background-color: orange;
+}
+
+.green-background {
+  background-color: green;
+}

@@ -16,7 +16,7 @@ class Book {
         this.pagesRead = pagesRead;
         this.totalPages = totalPages;
         // this.progress = ((pagesRead / totalPages) * 100).toFixed(2);
-        this.progress = `${((pagesRead / totalPages) * 100).toFixed(0)}%`;
+        this.progress = ((pagesRead / totalPages) * 100).toFixed(0);
     }
 }
 
@@ -102,17 +102,27 @@ function updateTable() {
     for (let i = 0; i < bookList.length; i++) {
         const book = bookList[i];
 
+        // Create a new row for each book
         const row = bookTable.insertRow();
         const keys = ["title", "author", "bookType", "pagesRead", "totalPages", "progress"];
         for (const key of keys) {
             const cell = row.insertCell();
             cell.textContent = book[key];
+            // Check if the current cell is for the "progress" property
+            if (key === "progress") {
+                cell.classList.add("progress-cell");
+                // cell.innerHTML = `<div class="progress-circle">${book[key]}%</div>`;
+                let progress = book[key];
+                let colorClass = getColorProgress(progress);
+                cell.innerHTML = `<div class="progress-circle ${colorClass}">${progress}%</div>`
+            }
         }
 
         const editCell = row.insertCell();
         const editButton = document.createElement("button");
         editButton.textContent = "Edit";
         editButton.onclick = () => showFormForEdit(i); // Pass the book index for editing
+        // editButton.onclick = () => editBook(i); // Pass the book index for editing
         editCell.appendChild(editButton);
 
         const deleteCell = row.insertCell();
@@ -123,3 +133,63 @@ function updateTable() {
     }
 }
 
+// Function to determine the color class based on progress value
+function getColorProgress(progress) {
+    if (progress < 25) {
+        return "red-background"; // You can define CSS classes for different colors
+    } else if (progress < 50) {
+        return "yellow-background";
+    } else if (progress < 75) {
+        return "orange-background";
+    } else {
+        return "green-background";
+    }
+}
+
+function deleteBook(bookIndex) {
+    // Remove the selected book from the bookList array
+    bookList.splice(bookIndex, 1);
+    updateTable();
+}
+
+let selectedBookIndex = null; // Keep track of the selected book for editing
+
+function showFormForEdit(bookIndex) {
+    const formContainer = document.getElementById("form-container");
+    formContainer.style.display = "flex";
+
+    // Fill the form with the selected book's data
+    const selectedBook = bookList[bookIndex];
+    document.getElementById("title").value = selectedBook.title;
+    document.getElementById("author").value = selectedBook.author;
+    document.getElementById("book-type").value = selectedBook.bookType;
+    document.getElementById("pages-read").value = selectedBook.pagesRead;
+    document.getElementById("total-pages").value = selectedBook.totalPages;
+
+    selectedBookIndex = bookIndex;
+}
+
+function editBook() {
+    if (selectedBookIndex !== null) {
+        const title = document.getElementById("title").value;
+        const author = document.getElementById("author").value;
+        const bookType = document.getElementById("book-type").value;
+        const pagesRead = parseInt(document.getElementById("pages-read").value);
+        const totalPages = parseInt(document.getElementById("total-pages").value);
+        const progress = ((pagesRead / totalPages) * 100).toFixed(0);
+
+        // Update the selected book's data in the bookList array
+        bookList[selectedBookIndex].title = title;
+        bookList[selectedBookIndex].author = author;
+        bookList[selectedBookIndex].bookType = bookType;
+        bookList[selectedBookIndex].pagesRead = pagesRead;
+        bookList[selectedBookIndex].totalPages = totalPages;
+        bookList[selectedBookIndex].progress = progress;
+
+        updateTable();
+
+        document.getElementById("book-form").reset();
+        closeForm();
+        selectedBookIndex = null;
+    }
+}
