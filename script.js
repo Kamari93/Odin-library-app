@@ -8,12 +8,23 @@ const updateBtn = document.getElementById("edit-button");
 
 // List of Book Objects
 let bookList = [];
+let selectedBookIndex = null; // Keep track of the selected book for editing
+enterEditMode(false); //Sets the default form to submit/add mode
+resetFormEmptyList(); //Makes sure form stays empty when bookList is empty (invalid now)
 
-if (bookList.length < 0) {
-    document.getElementById("book-form").reset()
+
+// Function to save data to local storage
+function saveToLocalStorage() {
+    localStorage.setItem("bookList", JSON.stringify(bookList));
 }
 
-let editingMode = false; // Initially, set to add mode
+// Function to load data from local storage
+function loadFromLocalStorage() {
+    const storedData = localStorage.getItem("bookList");
+    if (storedData) {
+        bookList = JSON.parse(storedData);
+    }
+}
 
 // The book object and constructor
 class Book {
@@ -78,7 +89,11 @@ function closeForm() {
     enterEditMode(false);
 }
 
-enterEditMode(false);
+function resetFormEmptyList() {
+    if (bookList.length < 0) {
+        document.getElementById("book-form").reset()
+    }
+}
 
 function addBook() {
     const title = document.getElementById("title").value;
@@ -87,12 +102,11 @@ function addBook() {
     const pagesRead = parseInt(document.getElementById("pages-read").value);
     const totalPages = parseInt(document.getElementById("total-pages").value);
 
-    // getElementById("edit-button").style.display = "none";
-
     // Create a new Book object
     const newBook = new Book(title, author, bookType, pagesRead, totalPages);
 
     bookList.push(newBook); // Add the book to the list
+    saveToLocalStorage();
     updateTable(); // Update the table
 
     document.getElementById("book-form").reset();
@@ -160,10 +174,9 @@ function getColorProgress(progress) {
 function deleteBook(bookIndex) {
     // Remove the selected book from the bookList array
     bookList.splice(bookIndex, 1);
+    saveToLocalStorage();
     updateTable();
 }
-
-let selectedBookIndex = null; // Keep track of the selected book for editing
 
 function enterEditMode(edit) {
     if (edit === true) {
@@ -210,7 +223,7 @@ function editBookPopulateTable() {
         bookList[selectedBookIndex].totalPages = totalPages;
         bookList[selectedBookIndex].progress = progress;
 
-
+        saveToLocalStorage();
         updateTable();
 
         document.getElementById("book-form").reset();
@@ -219,3 +232,7 @@ function editBookPopulateTable() {
         selectedBookIndex = null;
     }
 }
+
+// Initialize your application
+loadFromLocalStorage();
+updateTable();
