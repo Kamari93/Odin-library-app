@@ -74,8 +74,11 @@ function showForm() {
 function closeForm() {
     const formContainer = document.getElementById("form-container");
     formContainer.style.display = "none";
-    // formContainer.reset();
+    document.getElementById("book-form").reset();
+    enterEditMode(false);
 }
+
+enterEditMode(false);
 
 function addBook() {
     const title = document.getElementById("title").value;
@@ -83,6 +86,8 @@ function addBook() {
     const bookType = document.getElementById("book-type").value;
     const pagesRead = parseInt(document.getElementById("pages-read").value);
     const totalPages = parseInt(document.getElementById("total-pages").value);
+
+    // getElementById("edit-button").style.display = "none";
 
     // Create a new Book object
     const newBook = new Book(title, author, bookType, pagesRead, totalPages);
@@ -126,7 +131,6 @@ function updateTable() {
         editButton.classList.add("edit")
         editButton.textContent = "Edit";
         editButton.onclick = () => showFormForEdit(i); // Pass the book index for editing
-        // editButton.onclick = () => editBook(i); // Pass the book index for editing
         editCell.appendChild(editButton);
 
         const deleteCell = row.insertCell();
@@ -159,16 +163,22 @@ function deleteBook(bookIndex) {
 
 let selectedBookIndex = null; // Keep track of the selected book for editing
 
-function enterEditMode() {
-    editingMode = true;
-    document.getElementById("add-button").style.display = "none";
-    document.getElementById("edit-button").style.display = "flex";
+function enterEditMode(edit) {
+    if (edit === true) {
+        document.getElementById("Formheader").textContent = "Edit Book";
+        document.getElementById("submit-button").style.display = "none";
+        document.getElementById("edit-button").style.display = "flex";
+    } else {
+        document.getElementById("Formheader").textContent = "Add a Book";
+        document.getElementById("submit-button").style.display = "flex";
+        document.getElementById("edit-button").style.display = "none";
+    }
 };
 
 function showFormForEdit(bookIndex) {
+    enterEditMode(true);
     const formContainer = document.getElementById("form-container");
     formContainer.style.display = "flex";
-    // enterEditMode()
 
     // Fill the form with the selected book's data
     const selectedBook = bookList[bookIndex];
@@ -177,9 +187,6 @@ function showFormForEdit(bookIndex) {
     document.getElementById("book-type").value = selectedBook.bookType;
     document.getElementById("pages-read").value = selectedBook.pagesRead;
     document.getElementById("total-pages").value = selectedBook.totalPages;
-
-    // updateBtn.style.display = "flex";
-    // submitBtn.style.display = "none";
 
     selectedBookIndex = bookIndex;
 }
@@ -201,10 +208,12 @@ function editBookPopulateTable() {
         bookList[selectedBookIndex].totalPages = totalPages;
         bookList[selectedBookIndex].progress = progress;
 
+
         updateTable();
 
         document.getElementById("book-form").reset();
         closeForm();
+        enterEditMode(false)
         selectedBookIndex = null;
     }
 }
