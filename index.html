@@ -114,12 +114,17 @@
                 <label for="total-pages">Total Pages:</label>
                 <input type="number" id="total-pages" min="1" required />
               </div>
-              <!-- <div class="form-group">
-                <label for="date-added">Date Added:</label>
-                <input type="date" id="date-added" required />
-              </div> -->
               <div class="form-group sub-button">
-                <button type="button" onclick="addBook()">Submit</button>
+                <button type="button" id="submit-button" onclick="addBook()">
+                  Submit
+                </button>
+                <button
+                  type="button"
+                  id="edit-button"
+                  onclick="editBookPopulateTable()"
+                >
+                  Update
+                </button>
               </div>
             </form>
           </div>

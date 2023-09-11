@@ -3,9 +3,17 @@ console.log("Keep Going 🍊 🌊...");
 const themeSelect = document.getElementById('theme-select');
 const genreCheckboxes = document.querySelectorAll('input[name="genre"]');
 const selectAllGenresCheckbox = document.getElementById('select-all-genres');
+const submitBtn = document.getElementById("submit-button");
+const updateBtn = document.getElementById("edit-button");
 
 // List of Book Objects
 let bookList = [];
+
+if (bookList.length < 0) {
+    document.getElementById("book-form").reset()
+}
+
+let editingMode = false; // Initially, set to add mode
 
 // The book object and constructor
 class Book {
@@ -25,14 +33,6 @@ themeSelect.addEventListener('change', toggleTheme);
 
 // Add event listener for "Select All" checkbox
 selectAllGenresCheckbox.addEventListener('change', toggleSelectAllGenres);
-
-
-/** add funct that takes user’s input and store the new book objs  into myLibrary arr*/
-// function addBookToLibrary() {
-//     // do stuff here...
-//     const newBook = new Books(title, author, totalPages, pagesRead, completed);
-//     myLibrary.push(newBook);
-// };
 
 
 function toggleTheme () {
@@ -67,11 +67,14 @@ function toggleSelectAllGenres() {
 function showForm() {
     const formContainer = document.getElementById("form-container");
     formContainer.style.display = "flex";
+    // updateBtn.style.display = "none";
+    // submitBtn.style.display = "flex";
 }
 
 function closeForm() {
     const formContainer = document.getElementById("form-container");
     formContainer.style.display = "none";
+    // formContainer.reset();
 }
 
 function addBook() {
@@ -120,6 +123,7 @@ function updateTable() {
 
         const editCell = row.insertCell();
         const editButton = document.createElement("button");
+        editButton.classList.add("edit")
         editButton.textContent = "Edit";
         editButton.onclick = () => showFormForEdit(i); // Pass the book index for editing
         // editButton.onclick = () => editBook(i); // Pass the book index for editing
@@ -127,6 +131,7 @@ function updateTable() {
 
         const deleteCell = row.insertCell();
         const deleteButton = document.createElement("button");
+        deleteButton.classList.add("delete")
         deleteButton.textContent = "Delete";
         deleteButton.onclick = () => deleteBook(i); // Pass the book index for deletion
         deleteCell.appendChild(deleteButton);
@@ -154,9 +159,16 @@ function deleteBook(bookIndex) {
 
 let selectedBookIndex = null; // Keep track of the selected book for editing
 
+function enterEditMode() {
+    editingMode = true;
+    document.getElementById("add-button").style.display = "none";
+    document.getElementById("edit-button").style.display = "flex";
+};
+
 function showFormForEdit(bookIndex) {
     const formContainer = document.getElementById("form-container");
     formContainer.style.display = "flex";
+    // enterEditMode()
 
     // Fill the form with the selected book's data
     const selectedBook = bookList[bookIndex];
@@ -166,10 +178,13 @@ function showFormForEdit(bookIndex) {
     document.getElementById("pages-read").value = selectedBook.pagesRead;
     document.getElementById("total-pages").value = selectedBook.totalPages;
 
+    // updateBtn.style.display = "flex";
+    // submitBtn.style.display = "none";
+
     selectedBookIndex = bookIndex;
 }
 
-function editBook() {
+function editBookPopulateTable() {
     if (selectedBookIndex !== null) {
         const title = document.getElementById("title").value;
         const author = document.getElementById("author").value;

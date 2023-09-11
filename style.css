@@ -291,6 +291,37 @@ tr:hover {
   background-color: #d3d3d3;
 }
 
+/* #edit-button {
+  display: none;
+} */
+
+.edit {
+  background: #88bbc6;
+  padding: 5px;
+  border-radius: 10px;
+  border: none;
+  /* display: flex; */
+  /* width: 100%; */
+  /* text-align: center; */
+}
+
+.edit:hover {
+  cursor: pointer;
+}
+
+.delete {
+  background: red;
+  padding: 5px;
+  border-radius: 10px;
+  border: none;
+  /* width: 100%; */
+  /* text-align: center; */
+}
+
+.delete:hover {
+  cursor: pointer;
+}
+
 /* Add this CSS for styling the progress cell */
 .progress-cell {
   text-align: left;
@@ -299,13 +330,13 @@ tr:hover {
 .progress-cell .progress-circle {
   display: inline-block;
   text-align: center;
-  width: 40px; /* Adjust the size as needed */
-  height: 40px; /* Adjust the size as needed */
-  line-height: 40px; /* Vertically center the text within the circle */
-  /* background-color: green; Change to your desired circular border color */
+  width: 35px; /* Adjust the size as needed */
+  height: 35px; /* Adjust the size as needed */
+  line-height: 35px; /* Vertically center the text within the circle */
   border-radius: 50%; /* Create a circular shape */
   color: white; /* Text color */
   font-weight: bold;
+  font-size: 15px;
 }
 
 /* Define CSS classes for background colors */
