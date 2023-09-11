@@ -129,14 +129,16 @@ function updateTable() {
         const editCell = row.insertCell();
         const editButton = document.createElement("button");
         editButton.classList.add("edit")
-        editButton.textContent = "Edit";
+        // editButton.textContent = "Edit";
+        editButton.innerHTML = '<i class="fa fa-pencil-square-o"></i>';
         editButton.onclick = () => showFormForEdit(i); // Pass the book index for editing
         editCell.appendChild(editButton);
 
         const deleteCell = row.insertCell();
         const deleteButton = document.createElement("button");
         deleteButton.classList.add("delete")
-        deleteButton.textContent = "Delete";
+        // deleteButton.textContent = "Delete";
+        deleteButton.innerHTML = `<i class="fa fa-trash"></i>`;
         deleteButton.onclick = () => deleteBook(i); // Pass the book index for deletion
         deleteCell.appendChild(deleteButton);
     }

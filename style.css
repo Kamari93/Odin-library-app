@@ -296,10 +296,14 @@ tr:hover {
 } */
 
 .edit {
-  background: #88bbc6;
+  background: none;
   padding: 5px;
-  border-radius: 10px;
+  border-radius: 50%;
   border: none;
+  width: 40px;
+  height: 40px;
+  font-size: 25px;
+  color: olive;
   /* display: flex; */
   /* width: 100%; */
   /* text-align: center; */
@@ -310,10 +314,14 @@ tr:hover {
 }
 
 .delete {
-  background: red;
+  background: none;
   padding: 5px;
-  border-radius: 10px;
+  border-radius: 50%;
   border: none;
+  width: 40px;
+  height: 40px;
+  font-size: 25px;
+  color: rgb(186, 58, 19);
   /* width: 100%; */
   /* text-align: center; */
 }
@@ -330,9 +338,9 @@ tr:hover {
 .progress-cell .progress-circle {
   display: inline-block;
   text-align: center;
-  width: 35px; /* Adjust the size as needed */
-  height: 35px; /* Adjust the size as needed */
-  line-height: 35px; /* Vertically center the text within the circle */
+  width: 40px; /* Adjust the size as needed */
+  height: 40px; /* Adjust the size as needed */
+  line-height: 40px; /* Vertically center the text within the circle */
   border-radius: 50%; /* Create a circular shape */
   color: white; /* Text color */
   font-weight: bold;
