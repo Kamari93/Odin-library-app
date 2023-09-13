@@ -13,18 +13,11 @@ enterEditMode(false); //Sets the default form to submit/add mode
 resetFormEmptyList(); //Makes sure form stays empty when bookList is empty (invalid now)
 
 
-// Function to save data to local storage
-function saveToLocalStorage() {
-    localStorage.setItem("bookList", JSON.stringify(bookList));
-}
+themeSelect.addEventListener('change', toggleTheme);
 
-// Function to load data from local storage
-function loadFromLocalStorage() {
-    const storedData = localStorage.getItem("bookList");
-    if (storedData) {
-        bookList = JSON.parse(storedData);
-    }
-}
+// Add event listener for "Select All" checkbox
+selectAllGenresCheckbox.addEventListener('change', toggleSelectAllGenres);
+
 
 // The book object and constructor
 class Book {
@@ -39,11 +32,18 @@ class Book {
     }
 }
 
+// Function to save data to local storage
+function saveToLocalStorage() {
+    localStorage.setItem("bookList", JSON.stringify(bookList));
+}
 
-themeSelect.addEventListener('change', toggleTheme);
-
-// Add event listener for "Select All" checkbox
-selectAllGenresCheckbox.addEventListener('change', toggleSelectAllGenres);
+// Function to load data from local storage
+function loadFromLocalStorage() {
+    const storedData = localStorage.getItem("bookList");
+    if (storedData) {
+        bookList = JSON.parse(storedData);
+    }
+}
 
 
 function toggleTheme () {
@@ -102,15 +102,24 @@ function addBook() {
     const pagesRead = parseInt(document.getElementById("pages-read").value);
     const totalPages = parseInt(document.getElementById("total-pages").value);
 
-    // Create a new Book object
-    const newBook = new Book(title, author, bookType, pagesRead, totalPages);
+    // Validate input
+    if (validateAddBook(title, author, bookType, pagesRead, totalPages)) {
+        // Check if a book with the same title and author already exists
+        const isDuplicate = bookList.some(book => book.title === title && book.author === author);
 
-    bookList.push(newBook); // Add the book to the list
-    saveToLocalStorage();
-    updateTable(); // Update the table
+        if (isDuplicate) {
+            alert("This book already exists in the library.");
+        } else {
+            // Create a new Book object
+            const newBook = new Book(title, author, bookType, pagesRead, totalPages);
+            bookList.push(newBook); // Add the book to the list
+            saveToLocalStorage();
+            updateTable(); // Update the table
 
-    document.getElementById("book-form").reset();
-    closeForm();
+            document.getElementById("book-form").reset();
+            closeForm();
+        }
+    }
 }
 
 
@@ -133,10 +142,14 @@ function updateTable() {
             // Check if the current cell is for the "progress" property
             if (key === "progress") {
                 cell.classList.add("progress-cell");
-                // cell.innerHTML = `<div class="progress-circle">${book[key]}%</div>`;
                 let progress = book[key];
                 let colorClass = getColorProgress(progress);
                 cell.innerHTML = `<div class="progress-circle ${colorClass}">${progress}%</div>`
+            }
+
+            if (key === "title") {
+                cell.classList.add("title-column"); // Apply the CSS class
+                cell.classList.add("title-col"); // Apply the CSS class
             }
         }
 
@@ -164,18 +177,24 @@ function getColorProgress(progress) {
         return "red-background"; // You can define CSS classes for different colors
     } else if (progress < 50) {
         return "yellow-background";
-    } else if (progress < 75) {
-        return "orange-background";
+    } else if (progress < 90) {
+        return "blue-background";
     } else {
         return "green-background";
     }
 }
 
 function deleteBook(bookIndex) {
-    // Remove the selected book from the bookList array
-    bookList.splice(bookIndex, 1);
-    saveToLocalStorage();
-    updateTable();
+    // Ask the user for confirmation by using js built in confirm funct
+    const isConfirmed = confirm("Are you sure you want to delete this book?");
+    if (isConfirmed) {
+        // Remove the selected book from the bookList array
+        bookList.splice(bookIndex, 1);
+        saveToLocalStorage();
+        updateTable();
+    } else {
+
+    }
 }
 
 function enterEditMode(edit) {
@@ -215,22 +234,44 @@ function editBookPopulateTable() {
         const totalPages = parseInt(document.getElementById("total-pages").value);
         const progress = ((pagesRead / totalPages) * 100).toFixed(0);
 
-        // Update the selected book's data in the bookList array
-        bookList[selectedBookIndex].title = title;
-        bookList[selectedBookIndex].author = author;
-        bookList[selectedBookIndex].bookType = bookType;
-        bookList[selectedBookIndex].pagesRead = pagesRead;
-        bookList[selectedBookIndex].totalPages = totalPages;
-        bookList[selectedBookIndex].progress = progress;
+        // Validate input
+        if (validateEditBook(title, author, bookType, pagesRead, totalPages)) {
+            // Update the selected book's data in the bookList array
+            bookList[selectedBookIndex].title = title;
+            bookList[selectedBookIndex].author = author;
+            bookList[selectedBookIndex].bookType = bookType;
+            bookList[selectedBookIndex].pagesRead = pagesRead;
+            bookList[selectedBookIndex].totalPages = totalPages;
+            bookList[selectedBookIndex].progress = progress;
 
-        saveToLocalStorage();
-        updateTable();
+            saveToLocalStorage();
+            updateTable();
 
-        document.getElementById("book-form").reset();
-        closeForm();
-        enterEditMode(false)
-        selectedBookIndex = null;
+            document.getElementById("book-form").reset();
+            closeForm();
+            enterEditMode(false)
+            selectedBookIndex = null;
+        }
     }
+}
+
+// Validation function for the "Add" operation
+function validateAddBook(title, author, bookType, pagesRead, totalPages) {
+    // trim ensures user can't input blank spaces as valid input
+    if (title.trim() === '' || author.trim() === '' || bookType === '' || isNaN(pagesRead) || isNaN(totalPages) || pagesRead > totalPages) {
+        alert("Please fill in all fields correctly.");
+        return false;
+    }
+    return true;
+}
+
+// Validation function for the "Edit" operation
+function validateEditBook(title, author, bookType, pagesRead, totalPages) {
+    if (title.trim() === '' || author.trim() === '' || bookType === '' || isNaN(pagesRead) || isNaN(totalPages) || pagesRead > totalPages) {
+        alert("Please fill in all fields correctly.");
+        return false;
+    }
+    return true;
 }
 
 // Initialize your application

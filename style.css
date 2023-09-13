@@ -277,7 +277,7 @@ table {
 th,
 td {
   padding: 12px 15px;
-  text-align: left;
+  text-align: center;
   border-bottom: 1px solid #ccc;
 }
 th {
@@ -291,6 +291,17 @@ tr:hover {
   background-color: #d3d3d3;
 }
 
+.title-col {
+  text-align: left;
+}
+
+.title-column {
+  white-space: nowrap; /* Prevents line breaks by default */
+  overflow: hidden; /* Hide overflow text */
+  text-overflow: ellipsis; /* Show ellipsis (...) for overflow text */
+  max-width: 200px; /* Adjust the max width as needed */
+  word-wrap: break-word; /* Enable word wrapping */
+}
 /* #edit-button {
   display: none;
 } */
@@ -331,9 +342,9 @@ tr:hover {
 }
 
 /* Add this CSS for styling the progress cell */
-.progress-cell {
+/* .progress-cell {
   text-align: left;
-}
+} */
 
 .progress-cell .progress-circle {
   display: inline-block;
@@ -349,17 +360,17 @@ tr:hover {
 
 /* Define CSS classes for background colors */
 .red-background {
-  background-color: red;
+  background-color: rgb(179, 63, 63);
 }
 
 .yellow-background {
-  background-color: yellow;
+  background-color: rgb(162, 143, 68);
 }
 
-.orange-background {
-  background-color: orange;
+.blue-background {
+  background-color: rgb(31, 106, 135);
 }
 
 .green-background {
-  background-color: green;
+  background-color: rgb(0, 128, 98);
 }

@@ -35,7 +35,11 @@
           <div class="checkboxes">
             <label class="checkbox-label">
               <input type="checkbox" name="genre" value="book" checked />
-              Traditional Book
+              Traditional
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="genre" value="e-book" checked />
+              E-Book
             </label>
             <label class="checkbox-label">
               <input type="checkbox" name="genre" value="audio" checked />
@@ -102,6 +106,7 @@
                 <label for="book-type">Book Type:</label>
                 <select id="book-type">
                   <option value="Traditional">Traditional</option>
+                  <option value="Electronic">Electronic</option>
                   <option value="Audio">Audio</option>
                   <option value="Summary">Summary</option>
                 </select>
@@ -134,7 +139,7 @@
       <table>
         <thead>
           <tr>
-            <th>Title</th>
+            <th class="title-col">Title</th>
             <th>Author</th>
             <th>Book Type</th>
             <!-- <th>Description</th> -->
