@@ -294,7 +294,7 @@ function filterAndHideCategories() {
 
     const bookTableRows = document.querySelectorAll("#book-list tr");
 
-    // only show the rows that have the bookType val === to selectedCheckbox vals
+    // only show the rows that have the bookType vals === to selectedCheckbox vals
     bookTableRows.forEach(row => {
         const bookCategory = row.getAttribute("data-category");
         if (!selectedCategories.includes(bookCategory)) {
