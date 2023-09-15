@@ -130,6 +130,8 @@ function updateTable() {
         bookTable.firstChild.remove();
     }
 
+    // bookTable.innerHTML = "";
+
     for (let i = 0; i < bookList.length; i++) {
         const book = bookList[i];
 
@@ -152,6 +154,10 @@ function updateTable() {
                 cell.classList.add("title-col"); // Apply the CSS class
             }
         }
+
+        // Add the data-category attribute based on the book's category
+        row.setAttribute("data-category", book.bookType);
+        // console.log(row.getAttribute("data-category"))
 
         const editCell = row.insertCell();
         const editButton = document.createElement("button");
@@ -272,6 +278,31 @@ function validateEditBook(title, author, bookType, pagesRead, totalPages) {
         return false;
     }
     return true;
+}
+
+// Add an event listener to handle checkbox changes
+genreCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener("change", filterAndHideCategories);
+});
+
+// Function to filter books and hide unchecked categories
+function filterAndHideCategories() {
+    // create a list of only the selected checkboxes
+    const selectedCategories = Array.from(genreCheckboxes)
+        .filter(checkbox => checkbox.checked)
+        .map(checkbox => checkbox.value); // Assuming value attribute stores category
+
+    const bookTableRows = document.querySelectorAll("#book-list tr");
+
+    // only show the rows that have the bookType val === to selectedCheckbox vals
+    bookTableRows.forEach(row => {
+        const bookCategory = row.getAttribute("data-category");
+        if (!selectedCategories.includes(bookCategory)) {
+            row.style.display = "none";
+        } else {
+            row.style.display = "";
+        }
+    });
 }
 
 // Initialize your application
