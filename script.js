@@ -322,9 +322,6 @@ cancelSortRadio.addEventListener("change", () => sortChronological());
 // Function to sort the table rows
 function sortTable(order) {
     const rows = Array.from(bookTable.querySelectorAll("tr"));
-    // rows.shift(); // Remove the header row
-    // const headerRow = rows.shift(); // Remove and store the header row
-
     // Sort the rows based on the progress attribute
     rows.sort((rowA, rowB) => {
         const progressA = parseFloat(rowA.querySelector(".progress-cell").textContent);
@@ -335,10 +332,9 @@ function sortTable(order) {
 
     // Append sorted rows back to the table
     bookTable.innerHTML = "";
-    // bookTable.appendChild(document.querySelector("thead")); // Re-add the header row
-    // bookTable.appendChild(headerRow); // Re-add the header row
     rows.forEach(row => bookTable.appendChild(row));
 }
+
 
 // Function to sort the table rows by chronological order (book index)
 function sortChronological() {
@@ -349,5 +345,18 @@ function sortChronological() {
 // Initialize your application
 loadFromLocalStorage();
 updateTable();
-console.log(bookList[10]["index"])
-// console.log(bookList)
+console.log(bookList[10]["index"]);
+
+
+//Alternate sort functions ascend/descend (not as compatible with sortChronological)
+// // Function to sort the table rows by ascending progress
+// function sortAscending() {
+//     bookList.sort((a, b) => (a.progress) - (b.progress));
+//     updateTable();
+// }
+
+// // Function to sort the table rows by descending progress
+// function sortDescending() {
+//     bookList.sort((a, b) => (b.progress) - (a.progress));
+//     updateTable();
+// }
