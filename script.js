@@ -26,7 +26,7 @@ selectAllGenresCheckbox.addEventListener('change', toggleSelectAllGenres);
 
 // The book object and constructor
 class Book {
-    constructor(title, author, bookType, pagesRead, totalPages) {
+    constructor(title, author, bookType, pagesRead, totalPages, index) {
         this.title = title;
         this.author = author;
         this.bookType = bookType;
@@ -34,6 +34,7 @@ class Book {
         this.totalPages = totalPages;
         // this.progress = ((pagesRead / totalPages) * 100).toFixed(2);
         this.progress = ((pagesRead / totalPages) * 100).toFixed(0);
+        this.index = index;
     }
 }
 
@@ -115,8 +116,10 @@ function addBook() {
         if (isDuplicate) {
             alert("This book already exists in the library.");
         } else {
+            // Get the current length of the bookList array as the index
+            const index = bookList.length;
             // Create a new Book object
-            const newBook = new Book(title, author, bookType, pagesRead, totalPages);
+            const newBook = new Book(title, author, bookType, pagesRead, totalPages, index);
             bookList.push(newBook); // Add the book to the list
             saveToLocalStorage();
             updateTable(); // Update the table
@@ -126,6 +129,7 @@ function addBook() {
         }
     }
 }
+
 
 
 function updateTable() {
@@ -336,9 +340,8 @@ function sortTable(order) {
     rows.forEach(row => bookTable.appendChild(row));
 }
 
-
-
 // Initialize your application
 loadFromLocalStorage();
 updateTable();
-console.log(bookList)
+console.log(bookList[9]["author"])
+console.log(bookList[10]["index"])
