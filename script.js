@@ -139,21 +139,21 @@ function updateTable() {
         bookTable.firstChild.remove();
     }
 
-    // bookTable.innerHTML = "";
 
-    for (let i = 0; i < bookList.length; i++) {
-        const book = bookList[i];
+
+    bookList.forEach((book, index) => {
+        const books = book;
 
         // Create a new row for each book
         const row = bookTable.insertRow();
         const keys = ["title", "author", "bookType", "pagesRead", "totalPages", "progress"];
         for (const key of keys) {
             const cell = row.insertCell();
-            cell.textContent = book[key];
+            cell.textContent = books[key];
             // Check if the current cell is for the "progress" property
             if (key === "progress") {
                 cell.classList.add("progress-cell");
-                let progress = book[key];
+                let progress = books[key];
                 let colorClass = getColorProgress(progress);
                 cell.innerHTML = `<div class="progress-circle ${colorClass}">${progress}%</div>`
             }
@@ -165,7 +165,7 @@ function updateTable() {
         }
 
         // Add the data-category attribute based on the book's category
-        row.setAttribute("data-category", book.bookType);
+        row.setAttribute("data-category", books.bookType);
         // console.log(row.getAttribute("data-category"))
 
         const editCell = row.insertCell();
@@ -173,7 +173,7 @@ function updateTable() {
         editButton.classList.add("edit")
         // editButton.textContent = "Edit";
         editButton.innerHTML = '<i class="fa fa-pencil-square-o"></i>';
-        editButton.onclick = () => showFormForEdit(i); // Pass the book index for editing
+        editButton.onclick = () => showFormForEdit(index); // Pass the book index for editing
         editCell.appendChild(editButton);
 
         const deleteCell = row.insertCell();
@@ -181,9 +181,9 @@ function updateTable() {
         deleteButton.classList.add("delete")
         // deleteButton.textContent = "Delete";
         deleteButton.innerHTML = `<i class="fa fa-trash"></i>`;
-        deleteButton.onclick = () => deleteBook(i); // Pass the book index for deletion
+        deleteButton.onclick = () => deleteBook(index); // Pass the book index for deletion
         deleteCell.appendChild(deleteButton);
-    }
+    })
 }
 
 // Function to determine the color class based on progress value
@@ -317,7 +317,7 @@ function filterAndHideCategories() {
 // Add event listeners to radio buttons
 ascendingRadio.addEventListener("change", () => sortTable("ascending"));
 descendingRadio.addEventListener("change", () => sortTable("descending"));
-cancelSortRadio.addEventListener("change", () => cancelSort());
+cancelSortRadio.addEventListener("change", () => sortChronological());
 
 // Function to sort the table rows
 function sortTable(order) {
@@ -340,8 +340,14 @@ function sortTable(order) {
     rows.forEach(row => bookTable.appendChild(row));
 }
 
+// Function to sort the table rows by chronological order (book index)
+function sortChronological() {
+    bookList.sort((a, b) => a.index - b.index); // Sort the bookList array by index
+    updateTable(); // Update the table with the sorted data
+}
+
 // Initialize your application
 loadFromLocalStorage();
 updateTable();
-console.log(bookList[9]["author"])
 console.log(bookList[10]["index"])
+// console.log(bookList)
