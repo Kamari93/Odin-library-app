@@ -5,6 +5,11 @@ const genreCheckboxes = document.querySelectorAll('input[name="genre"]');
 const selectAllGenresCheckbox = document.getElementById('select-all-genres');
 const submitBtn = document.getElementById("submit-button");
 const updateBtn = document.getElementById("edit-button");
+const ascendingRadio = document.getElementById("ascend");
+const descendingRadio = document.getElementById("descend");
+const cancelSortRadio = document.getElementById("default");
+const bookTable = document.getElementById("book-list");
+
 
 // List of Book Objects
 let bookList = [];
@@ -305,6 +310,35 @@ function filterAndHideCategories() {
     });
 }
 
+// Add event listeners to radio buttons
+ascendingRadio.addEventListener("change", () => sortTable("ascending"));
+descendingRadio.addEventListener("change", () => sortTable("descending"));
+cancelSortRadio.addEventListener("change", () => cancelSort());
+
+// Function to sort the table rows
+function sortTable(order) {
+    const rows = Array.from(bookTable.querySelectorAll("tr"));
+    // rows.shift(); // Remove the header row
+    // const headerRow = rows.shift(); // Remove and store the header row
+
+    // Sort the rows based on the progress attribute
+    rows.sort((rowA, rowB) => {
+        const progressA = parseFloat(rowA.querySelector(".progress-cell").textContent);
+        const progressB = parseFloat(rowB.querySelector(".progress-cell").textContent);
+
+        return order === "ascending" ? progressA - progressB : progressB - progressA;
+    });
+
+    // Append sorted rows back to the table
+    bookTable.innerHTML = "";
+    // bookTable.appendChild(document.querySelector("thead")); // Re-add the header row
+    // bookTable.appendChild(headerRow); // Re-add the header row
+    rows.forEach(row => bookTable.appendChild(row));
+}
+
+
+
 // Initialize your application
 loadFromLocalStorage();
 updateTable();
+console.log(bookList)
