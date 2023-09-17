@@ -183,7 +183,13 @@ function updateTable() {
         deleteButton.innerHTML = `<i class="fa fa-trash"></i>`;
         deleteButton.onclick = () => deleteBook(index); // Pass the book index for deletion
         deleteCell.appendChild(deleteButton);
+        
+        // Check if the book is completed and update the statistics
+        if (book.pagesRead === book.totalPages) {
+            updateHeaderStats();
+        }
     })
+    
 }
 
 // Function to determine the color class based on progress value
@@ -352,6 +358,20 @@ function sortChronological() {
     bookList.sort((a, b) => a.index - b.index); // Sort the bookList array by index
     updateTable(); // Update the table with the sorted data
 }
+
+// Function to update the header statistics
+function updateHeaderStats() {
+    const totalBooksElement = document.getElementById("total-books");
+    const booksCompletedElement = document.getElementById("books-completed");
+
+    // Update the total number of books
+    totalBooksElement.textContent = bookList.length;
+
+    // Calculate the number of books completed (100% progress)
+    const booksCompleted = bookList.filter(book => (book.pagesRead / book.totalPages) === 1).length;
+    booksCompletedElement.textContent = booksCompleted;
+}
+
 
 // Initialize your application
 loadFromLocalStorage();

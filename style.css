@@ -41,6 +41,21 @@ body.dark {
   z-index: 2;
 }
 
+.total {
+  border: solid black 3px;
+  padding: 5px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.total-read {
+  margin-right: 10px;
+}
+
+.total-books {
+  margin-left: 5px;
+}
+
 body.light .navbar {
   background: var(--main-light);
 }
