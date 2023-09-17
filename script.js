@@ -321,12 +321,14 @@ cancelSortRadio.addEventListener("change", () => sortChronological());
 
 // Function to sort the table rows
 function sortTable(order) {
+    // create an arr from the table rows
     const rows = Array.from(bookTable.querySelectorAll("tr"));
     // Sort the rows based on the progress attribute
     rows.sort((rowA, rowB) => {
         const progressA = parseFloat(rowA.querySelector(".progress-cell").textContent);
         const progressB = parseFloat(rowB.querySelector(".progress-cell").textContent);
 
+        // ascending orders the rows from least to greatest else order from greatest to least
         return order === "ascending" ? progressA - progressB : progressB - progressA;
     });
 
@@ -348,7 +350,12 @@ updateTable();
 console.log(bookList[10]["index"]);
 
 
-//Alternate sort functions ascend/descend (not as compatible with sortChronological)
+/**
+ * Alternate sort functions ascend/descend (not as compatible with sortChronological)
+    not compatible b/c the updateTable() resets the table as new table
+    where as the above used sort re-arranges updated table w/out resetting it and not 
+    interfering w/ chrono funct 
+    **/
 // // Function to sort the table rows by ascending progress
 // function sortAscending() {
 //     bookList.sort((a, b) => (a.progress) - (b.progress));
