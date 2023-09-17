@@ -356,7 +356,7 @@ function sortChronological() {
 // Initialize your application
 loadFromLocalStorage();
 updateTable();
-console.log(bookList[10]["index"]);
+// console.log(bookList[10]["index"]);
 
 
 /**
