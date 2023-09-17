@@ -207,6 +207,8 @@ function deleteBook(bookIndex) {
         bookList.splice(bookIndex, 1);
         saveToLocalStorage();
         updateTable();
+        // Reload the page
+        location.reload();
     } else {
 
     }
@@ -266,6 +268,8 @@ function editBookPopulateTable() {
             closeForm();
             enterEditMode(false)
             selectedBookIndex = null;
+            // Reload the page
+            location.reload();
         }
     }
 }
