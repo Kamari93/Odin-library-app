@@ -243,34 +243,39 @@ function showFormForEdit(bookIndex) {
 }
 
 function editBookPopulateTable() {
-    if (selectedBookIndex !== null) {
-        const title = document.getElementById("title").value;
-        const author = document.getElementById("author").value;
-        const bookType = document.getElementById("book-type").value;
-        const pagesRead = parseInt(document.getElementById("pages-read").value);
-        const totalPages = parseInt(document.getElementById("total-pages").value);
-        const progress = ((pagesRead / totalPages) * 100).toFixed(0);
+    const isConfirmed = confirm("Are you sure you want to make changes to this book entry?");
+    if (isConfirmed) {
+        if (selectedBookIndex !== null) {
+            const title = document.getElementById("title").value;
+            const author = document.getElementById("author").value;
+            const bookType = document.getElementById("book-type").value;
+            const pagesRead = parseInt(document.getElementById("pages-read").value);
+            const totalPages = parseInt(document.getElementById("total-pages").value);
+            const progress = ((pagesRead / totalPages) * 100).toFixed(0);
 
-        // Validate input
-        if (validateEditBook(title, author, bookType, pagesRead, totalPages)) {
-            // Update the selected book's data in the bookList array
-            bookList[selectedBookIndex].title = title;
-            bookList[selectedBookIndex].author = author;
-            bookList[selectedBookIndex].bookType = bookType;
-            bookList[selectedBookIndex].pagesRead = pagesRead;
-            bookList[selectedBookIndex].totalPages = totalPages;
-            bookList[selectedBookIndex].progress = progress;
+            // Validate input
+            if (validateEditBook(title, author, bookType, pagesRead, totalPages)) {
+                // Update the selected book's data in the bookList array
+                bookList[selectedBookIndex].title = title;
+                bookList[selectedBookIndex].author = author;
+                bookList[selectedBookIndex].bookType = bookType;
+                bookList[selectedBookIndex].pagesRead = pagesRead;
+                bookList[selectedBookIndex].totalPages = totalPages;
+                bookList[selectedBookIndex].progress = progress;
 
-            saveToLocalStorage();
-            updateTable();
+                saveToLocalStorage();
+                updateTable();
 
-            document.getElementById("book-form").reset();
-            closeForm();
-            enterEditMode(false)
-            selectedBookIndex = null;
-            // Reload the page
-            location.reload();
+                document.getElementById("book-form").reset();
+                closeForm();
+                enterEditMode(false)
+                selectedBookIndex = null;
+                // Reload the page
+                location.reload();
+            }
         }
+    } else {
+        // do nothing
     }
 }
 
