@@ -197,11 +197,13 @@ function getColorProgress(progress) {
     if (progress < 25) {
         return "red-background"; // You can define CSS classes for different colors
     } else if (progress < 50) {
-        return "yellow-background";
+        return "orange-background";
     } else if (progress < 90) {
-        return "blue-background";
-    } else {
+        return "gold-background";
+    } else if (progress < 100){
         return "green-background";
+    } else {
+        return "green-background complete"
     }
 }
 
