@@ -565,10 +565,12 @@ body.dark tr:hover {
 
   .total-books {
     margin-left: 0;
+    display: none;
   }
 
   .total-read {
     margin-right: 0;
+    display: none;
   }
 
   .theme {
