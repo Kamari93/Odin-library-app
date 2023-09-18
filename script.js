@@ -378,6 +378,7 @@ function updateHeaderStats() {
 // Initialize your application
 loadFromLocalStorage();
 updateTable();
+updateHeaderStats()
 console.log(bookList);
 
 
