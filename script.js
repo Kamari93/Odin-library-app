@@ -123,12 +123,6 @@ function addBook() {
             bookList.push(newBook); // Add the book to the list
             saveToLocalStorage();
             updateTable(); // Update the table
-
-            // Check if the book is completed and update the statistics
-            if (newBook.pagesRead === newBook.totalPages) {
-                updateHeaderStats();
-            }
-
             document.getElementById("book-form").reset();
             closeForm();
         }
@@ -193,6 +187,7 @@ function updateTable() {
         if (book.pagesRead === book.totalPages) {
             updateHeaderStats();
         }
+        console.log(bookList.length)
     })
     
 }
