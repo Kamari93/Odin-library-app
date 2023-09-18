@@ -614,6 +614,10 @@ body.dark tr:hover {
     font-size: smaller;
   }
 
+  .table-container {
+    width: 94%;
+  }
+
   /* Add more media query rules to adjust other elements as needed */
 }
 
