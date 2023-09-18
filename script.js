@@ -187,7 +187,6 @@ function updateTable() {
         if (book.pagesRead === book.totalPages) {
             updateHeaderStats();
         }
-        console.log(bookList.length)
     })
     
 }
@@ -378,8 +377,7 @@ function updateHeaderStats() {
 // Initialize your application
 loadFromLocalStorage();
 updateTable();
-updateHeaderStats()
-console.log(bookList);
+// console.log(bookList);
 
 
 /**
