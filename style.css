@@ -554,6 +554,15 @@ body.dark tr:hover {
     gap: 5px;
   }
 
+  .title {
+    display: flex;
+    /* grid-template-columns: 0.1fr 0.9fr; */
+  }
+
+  .title h3 {
+    font-size: 8vw;
+  }
+
   .total-books {
     margin-left: 0;
   }
@@ -581,6 +590,25 @@ body.dark tr:hover {
 
   .checkbox-label,
   .radio {
+    font-size: smaller;
+    margin-left: 5px;
+  }
+
+  .radio {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .radio label {
+    margin-left: 2px;
+  }
+
+  .filter,
+  .sort {
+    padding: 5px;
+  }
+
+  table {
     font-size: smaller;
   }
 
