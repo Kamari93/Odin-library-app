@@ -540,3 +540,27 @@ body.dark tr:hover {
 .complete {
   border: rgb(255, 136, 0) solid 5px;
 }
+
+/* Example media query for small screens (less than 768px wide) */
+@media screen and (max-width: 768px) {
+  body {
+    grid-template-rows: auto 1fr; /* Adjust grid layout for smaller screens */
+  }
+
+  .navbar.light {
+    grid-template-rows: 1fr; /* Adjust grid layout for smaller screens */
+    grid-template-columns: 1fr; /* Adjust grid layout for smaller screens */
+    padding: 10px; /* Reduce padding for smaller screens */
+    gap: 5px;
+  }
+
+  .total-books {
+    margin-left: 0;
+  }
+
+  .total-read {
+    margin-right: 0;
+  }
+
+  /* Add more media query rules to adjust other elements as needed */
+}
