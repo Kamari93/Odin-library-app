@@ -614,3 +614,9 @@ body.dark tr:hover {
 
   /* Add more media query rules to adjust other elements as needed */
 }
+
+@media screen and (max-width: 500px) {
+  .title h3 {
+    font-size: 6vw;
+  }
+}
