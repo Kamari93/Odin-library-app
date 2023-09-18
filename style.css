@@ -562,5 +562,27 @@ body.dark tr:hover {
     margin-right: 0;
   }
 
+  .theme {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 25px 1fr;
+    /* gap: 0; */
+    /* justify-self: center; */
+  }
+
+  select {
+    width: 100%;
+  }
+
+  i {
+    margin-top: 5px;
+    margin-left: 2px;
+  }
+
+  .checkbox-label,
+  .radio {
+    font-size: smaller;
+  }
+
   /* Add more media query rules to adjust other elements as needed */
 }
