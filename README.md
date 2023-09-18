@@ -11,3 +11,8 @@ App features include:
 5. Filter book entries based on book type
 6. Sort book entries by booktype
 7. Form submission, edit, and delete validation
+
+Note: If having issues seeing book collection/completion count read instructions below
+GitHub Pages may cache your resources.
+
+Solution: Try to hard-refresh your web page in your browser by pressing Ctrl + F5 (Windows/Linux) or Cmd + Shift + R (Mac) to force a cache refresh.
