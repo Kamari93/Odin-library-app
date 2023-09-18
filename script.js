@@ -62,13 +62,13 @@ function toggleTheme () {
         const moonIcon = document.querySelector('i');
         moonIcon.className = 'fa fa-moon-o';
         // document.querySelector('.theme').appendChild(moonIcon);
-        document.querySelector('.theme').prepend(moonIcon);
+        document.querySelector('label').prepend(moonIcon);
     } else {
         // const sunIcon = document.createElement('i');
         const sunIcon = document.querySelector('i');
         sunIcon.className = 'fa fa-sun-o';
         // document.querySelector('.theme').appendChild(sunIcon);
-        document.querySelector('.theme').prepend(sunIcon);
+        document.querySelector('label').prepend(sunIcon);
     };
 };
 
