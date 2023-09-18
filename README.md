@@ -10,4 +10,4 @@ App features include:
 4. Change between dark/light theme
 5. Filter book entries based on book type
 6. Sort book entries by booktype
-7. Form, edit, and delete validation
+7. Form submission, edit, and delete validation
