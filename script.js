@@ -124,6 +124,11 @@ function addBook() {
             saveToLocalStorage();
             updateTable(); // Update the table
 
+            // Check if the book is completed and update the statistics
+            if (newBook.pagesRead === newBook.totalPages) {
+                updateHeaderStats();
+            }
+
             document.getElementById("book-form").reset();
             closeForm();
         }
