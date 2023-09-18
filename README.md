@@ -6,7 +6,7 @@ App features include:
 
 1. Add, Edit, and Delete current reads
 2. Track reading progress
-3. Track book collection/reading progress counts (desktop)
+3. Track book collection/completion counts (desktop)
 4. Change between light/dark themes
 5. Filter book entries based on book type
 6. Sort book entries by progress both ascending and descending
