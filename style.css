@@ -515,11 +515,16 @@ body.dark tr:hover {
 .red-background {
   /* background-color: rgb(179, 63, 63); */
   background-color: rgb(177, 89, 65);
+  /* background-color: rgb(100, 208, 199); */
+  /* border-top: dotted 5px rgb(177, 89, 65); */
 }
 
 .orange-background {
   /* background-color: rgb(162, 143, 68); */
   background-color: rgb(198, 113, 71);
+  /* background-color: rgb(100, 208, 199);
+  border-top: solid 5px rgb(198, 113, 71);
+  border-left: solid 5px rgb(198, 113, 71); */
 }
 
 .gold-background {
@@ -533,5 +538,5 @@ body.dark tr:hover {
 }
 
 .complete {
-  border: rgb(255, 136, 0) solid 3px;
+  border: rgb(255, 136, 0) solid 5px;
 }
