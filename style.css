@@ -394,6 +394,10 @@ body.dark .form {
   cursor: pointer;
 }
 
+body.dark .close-btn {
+  color: var(--main-light);
+}
+
 /* End Form */
 
 /* Main */
@@ -615,7 +619,7 @@ body.dark tr:hover {
   }
 
   .table-container {
-    width: 94%;
+    width: 99%;
   }
 
   /* Add more media query rules to adjust other elements as needed */
@@ -634,5 +638,9 @@ body.dark tr:hover {
   .total-read {
     margin-right: 0;
     display: none;
+  }
+
+  .table-container {
+    width: 94%;
   }
 }
