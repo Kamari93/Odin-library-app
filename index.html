@@ -99,7 +99,7 @@
             </div>
           </div>
           <div id="button-container" class="button-container">
-            <button class="add-book-button" onclick="showForm()">
+            <button class="add-book-button" onclick="bookManager.showForm()">
               <span class="button-icon"><i class="fa fa-plus"></i></span>
               <span class="button-text"
                 ><i class="fa fa-circle"></i> Add Book
@@ -111,7 +111,7 @@
           <!-- form -->
           <div class="form-container" id="form-container">
             <div class="form">
-              <span class="close-btn" onclick="closeForm()">&#10006;</span>
+              <span class="close-btn" onclick="bookManager.closeForm()">&#10006;</span>
               <h1 id="Formheader">Add a Book</h1>
               <form id="book-form">
                 <div class="form-group">
@@ -140,13 +140,12 @@
                   <input type="number" id="total-pages" min="1" required />
                 </div>
                 <div class="form-group sub-button">
-                  <button type="button" id="submit-button" onclick="addBook()">
+                  <button id="submit-button" onclick="bookManager.addBook()">
                     Submit
                   </button>
                   <button
-                    type="button"
                     id="edit-button"
-                    onclick="editBookPopulateTable()"
+                    onclick="bookManager.editBookPopulateTable()"
                   >
                     Update
                   </button>
